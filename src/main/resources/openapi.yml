@@ -1,0 +1,59 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger Petstore
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:8080/
+paths:
+  /student/{studentId}:
+    get:
+      summary: Fetch student by Id
+      operationId: getStudent
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          description: The id of the pet to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Student"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Student:
+      type: object
+      required:
+        - stduentId
+        - studentName
+      properties:
+        stduentId:
+          type: integer
+          format: int64
+        studentName:
+          type: string
+        tag:
+          type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
