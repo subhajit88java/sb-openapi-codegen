@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 /**
  * Error
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-14T01:24:01.094992+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-28T00:15:47.087365100+05:30[Asia/Calcutta]")
 public class Error   {
   @JsonProperty("code")
   private Integer code;

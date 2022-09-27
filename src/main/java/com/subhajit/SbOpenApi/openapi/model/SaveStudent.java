@@ -10,38 +10,38 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Student
+ * SaveStudent
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-28T00:15:47.087365100+05:30[Asia/Calcutta]")
-public class Student   {
-  @JsonProperty("stduentId")
-  private Long stduentId;
+public class SaveStudent   {
+  @JsonProperty("studentId")
+  private Long studentId;
 
   @JsonProperty("studentName")
   private String studentName;
 
-  public Student stduentId(Long stduentId) {
-    this.stduentId = stduentId;
+  public SaveStudent studentId(Long studentId) {
+    this.studentId = studentId;
     return this;
   }
 
   /**
-   * Get stduentId
-   * @return stduentId
+   * Get studentId
+   * @return studentId
   */
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
 
-  public Long getStduentId() {
-    return stduentId;
+  public Long getStudentId() {
+    return studentId;
   }
 
-  public void setStduentId(Long stduentId) {
-    this.stduentId = stduentId;
+  public void setStudentId(Long studentId) {
+    this.studentId = studentId;
   }
 
-  public Student studentName(String studentName) {
+  public SaveStudent studentName(String studentName) {
     this.studentName = studentName;
     return this;
   }
@@ -71,22 +71,22 @@ public class Student   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Student student = (Student) o;
-    return Objects.equals(this.stduentId, student.stduentId) &&
-        Objects.equals(this.studentName, student.studentName);
+    SaveStudent saveStudent = (SaveStudent) o;
+    return Objects.equals(this.studentId, saveStudent.studentId) &&
+        Objects.equals(this.studentName, saveStudent.studentName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(stduentId, studentName);
+    return Objects.hash(studentId, studentName);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Student {\n");
+    sb.append("class SaveStudent {\n");
     
-    sb.append("    stduentId: ").append(toIndentedString(stduentId)).append("\n");
+    sb.append("    studentId: ").append(toIndentedString(studentId)).append("\n");
     sb.append("    studentName: ").append(toIndentedString(studentName)).append("\n");
     sb.append("}");
     return sb.toString();

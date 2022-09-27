@@ -6,6 +6,7 @@
 package com.subhajit.SbOpenApi.openapi.api;
 
 import com.subhajit.SbOpenApi.openapi.model.Error;
+import com.subhajit.SbOpenApi.openapi.model.SaveStudent;
 import com.subhajit.SbOpenApi.openapi.model.Student;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-14T01:24:01.094992+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-28T00:15:47.087365100+05:30[Asia/Calcutta]")
 @Validated
 @Api(value = "student", description = "the student API")
 public interface StudentApi {
@@ -33,12 +34,14 @@ public interface StudentApi {
 
     /**
      * GET /student/{studentId} : Fetch student by Id
+     * This is description
      *
      * @param studentId The id of the pet to retrieve (required)
+     * @param studentName Student Name (required)
      * @return Expected response to a valid request (status code 200)
      *         or unexpected error (status code 200)
      */
-    @ApiOperation(value = "Fetch student by Id", nickname = "getStudent", notes = "", response = Student.class, tags={  })
+    @ApiOperation(value = "Fetch student by Id", nickname = "getStudent", notes = "This is description", response = Student.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Expected response to a valid request", response = Student.class),
         @ApiResponse(code = 200, message = "unexpected error", response = Error.class) })
@@ -46,16 +49,54 @@ public interface StudentApi {
         value = "/student/{studentId}",
         produces = { "application/json" }
     )
-    default ResponseEntity<Student> _getStudent(@ApiParam(value = "The id of the pet to retrieve",required=true) @PathVariable("studentId") String studentId) {
-        return getStudent(studentId);
+    default ResponseEntity<Student> _getStudent(@ApiParam(value = "The id of the pet to retrieve",required=true) @PathVariable("studentId") Integer studentId,@NotNull @ApiParam(value = "Student Name", required = true) @Valid @RequestParam(value = "studentName", required = true) String studentName) {
+        return getStudent(studentId, studentName);
     }
 
     // Override this method
-    default  ResponseEntity<Student> getStudent(String studentId) {
+    default  ResponseEntity<Student> getStudent(Integer studentId, String studentName) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"studentName\" : \"studentName\", \"stduentId\" : 0, \"tag\" : \"tag\" }";
+                    String exampleString = "{ \"studentName\" : \"studentName\", \"stduentId\" : 0 }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * POST /student/{studentId} : Fetch student by Id
+     * This is description
+     *
+     * @param studentId The id of the pet to retrieve (required)
+     * @param saveStudent  (required)
+     * @return Expected response to a valid request (status code 200)
+     *         or unexpected error (status code 200)
+     */
+    @ApiOperation(value = "Fetch student by Id", nickname = "saveStudent", notes = "This is description", response = Student.class, tags={  })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Expected response to a valid request", response = Student.class),
+        @ApiResponse(code = 200, message = "unexpected error", response = Error.class) })
+    @PostMapping(
+        value = "/student/{studentId}",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    default ResponseEntity<Student> _saveStudent(@ApiParam(value = "The id of the pet to retrieve",required=true) @PathVariable("studentId") Integer studentId,@ApiParam(value = "" ,required=true )  @Valid @RequestBody SaveStudent saveStudent) {
+        return saveStudent(studentId, saveStudent);
+    }
+
+    // Override this method
+    default  ResponseEntity<Student> saveStudent(Integer studentId, SaveStudent saveStudent) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"studentName\" : \"studentName\", \"stduentId\" : 0 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

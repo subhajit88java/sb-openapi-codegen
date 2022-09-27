@@ -6,18 +6,31 @@ info:
     name: MIT
 servers:
   - url: http://localhost:8080/
+
+
 paths:
   /student/{studentId}:
     get:
+      description: This is description
       summary: Fetch student by Id
       operationId: getStudent
+
       parameters:
         - name: studentId
           in: path
           required: true
           description: The id of the pet to retrieve
           schema:
+            type: integer
+
+        - name: studentName
+          in: query
+          required: true
+          description: Student Name
+          schema:
             type: string
+      
+
       responses:
         '200':
           description: Expected response to a valid request
@@ -31,6 +44,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
+    post:
+      description: This is description
+      summary: Fetch student by Id
+      operationId: saveStudent
+
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          description: The id of the pet to retrieve
+          schema:
+            type: integer
+
+      requestBody:
+       required: true
+       content:
+        application/json:
+         schema:
+          $ref: "#/components/schemas/SaveStudent"
+
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Student"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+   
+
+
+
+
 components:
   schemas:
     Student:
@@ -44,8 +96,8 @@ components:
           format: int64
         studentName:
           type: string
-        tag:
-          type: string
+          nullable: false
+        
     Error:
       type: object
       required:
@@ -57,3 +109,16 @@ components:
           format: int32
         message:
           type: string
+
+    SaveStudent:
+     type: object
+     required:
+       - studentId
+       - studentName
+     properties:
+       studentId:
+         type: integer
+         format: int64
+       studentName:
+         type: string
+         nullable: false
